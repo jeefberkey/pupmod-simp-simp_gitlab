@@ -115,6 +115,8 @@
 #   Format: RFC 4515 http://tools.ietf.org/search/rfc4515
 #   @example (employeeType=developer)
 #
+# @param ldap_encryption_method Method to connect to LDAP over TLS
+#
 # @param ldap_group_base
 #   EE only
 #
@@ -136,6 +138,7 @@ class simp_gitlab (
   String                 $ldap_bind_pw            = simplib::lookup('simp_options::ldap::bind_pw', {'default_value' => "cn=LDAPAdmin,ou=People,${ldap_base_dn}"}),
   Optional[String]       $ldap_group_base         = undef,
   Optional[String]       $ldap_user_filter        = undef,
+  Optional[Simp_gitlab::Encryption_method] $ldap_encryption_method = undef,
   Hash                   $gitlab_options          = {},
 
   Stdlib::Absolutepath   $app_pki_external_source = simplib::lookup('simp_options::pki::source', { 'default_value' => '/etc/pki/simp/x509' }),
